@@ -36,6 +36,7 @@ function TaskCard(props) {
                     <div>
                         {props.task.name}
                     </div>
+                    <p/>
                     <div className="clearfix">
                         <span className="float-left" onClick={() => props.onTaskDelete(props.task.id)}>{deleteIcon}</span>
                         <span className="float-right" onClick={() => props.onChangeStatus({id: props.task.id, direction: 'right'})}>{rightBtn}</span>

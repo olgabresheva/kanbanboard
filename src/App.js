@@ -9,63 +9,42 @@ function App() {
     const initialtasks = [
         {
             id: uuidv4(),
-            name: 'a1aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+            name: 'task 1: study!',
             priority: 'High',
             status: 'To Do'
         },
         {
             id: uuidv4(),
-            name: 'b2bbbbbbbbbbbbbbbbbbbbbbbbbb',
+            name: 'task 2: study more!',
             priority: 'Low',
             status: 'To Do'
         },
         {
             id: uuidv4(),
-            name: 'c3ccccccccccccccccccccccccc',
+            name: 'task 3: test',
             priority: 'Medium',
             status: 'In Progress'
         },
         {
             id: uuidv4(),
-            name: 'd4ddddddddddddddddddddddddd',
+            name: 'task 4: read documentation',
             priority: 'High',
             status: 'Done'
         },
         {
             id: uuidv4(),
-            name: 'e5eeeeeeeeeeeeeeeeeeeeeeeeee',
+            name: 'task 5: practice',
             priority: 'Medium',
             status: 'In Review'
         },
     ]
 
-    const [task, setTask] = useState(initialtasks);
-
-    const [taskInput, setTaskInput] = useState('');
-    const [isOpenTaskForm, setIsOpenTaskForm] = useState(false);
-
-    const onClickCreateTask = () => {
-        setIsOpenTaskForm(true);
-    }
-
-    const onCreateTaskCancel = () => {
-        setIsOpenTaskForm(false);
-        setTaskInput('');
-        setIsActiveTaskCreateBtn(false);
-        setIsOpenTaskForm(false);
-    }
-
-    const [isActiveTaskCreateBtn, setIsActiveTaskCreateBtn] = useState(true);
-
-    const onInputChange = (e) => {
-        (setIsActiveTaskCreateBtn(e.target.value.length < 4));
-        setTaskInput(e.target.value);
-    }
+    const [tasks, setTasks] = useState(initialtasks);
 
     const states = ['To Do', 'In Progress', 'In Review', 'Done'];
 
     const onChangeStatus = ({id, direction}) => {
-        const updatedTasks = task.map(el => {
+        const updatedTasks = tasks.map(el => {
             if (el.id === id) {
                 if (direction === 'left') {
                     el.status = states[states.indexOf(el.status) - 1];
@@ -76,13 +55,13 @@ function App() {
                 return el
             } else return el;
         });
-        setTask(updatedTasks);
+        setTasks(updatedTasks);
     };
 
     const [btnState, setBtnState] = useState(true);
 
     const onBtnStateChange = (id) => {
-        task.map(el => {
+        tasks.map(el => {
             if (el.id === id && el.status === 'To Do') {
                 return setBtnState(false);
             }
@@ -90,15 +69,15 @@ function App() {
     }
 
     const onTaskDelete = (id) => {
-        const taskListAfterDelete = task.filter(el => el.id !== id);
-        setTask(taskListAfterDelete);
+        const taskListAfterDelete = tasks.filter(el => el.id !== id);
+        setTasks(taskListAfterDelete);
     }
 
-    const onTaskCreate = (value) => {
-        console.log(value);
-        const updatedTaskList = [...task];
-        updatedTaskList.push({id: uuidv4(), name: value, priority: 'High', status: 'To Do'});
-        setTask(updatedTaskList);
+    const onTaskCreate = (taskInput) => {
+        console.log(taskInput);
+        const updatedTaskList = [...tasks];
+        updatedTaskList.push({id: uuidv4(), name: taskInput, priority: 'High' , status: states[0]});
+        setTasks(updatedTaskList);
     }
 
 
@@ -106,14 +85,7 @@ function App() {
         <div>
             <div className="container">
                 <h1>Kanban</h1>
-                <TaskCreateForm isOpenTaskForm={isOpenTaskForm}
-                                onClickCreateTask={onClickCreateTask}
-                                taskInput={taskInput}
-                                onInputChange={onInputChange}
-                                isActiveTaskCreateBtn={isActiveTaskCreateBtn}
-                                onTaskCreate={onTaskCreate}
-                                onCreateTaskCancel={onCreateTaskCancel}
-                />
+                <TaskCreateForm onTaskCreate={onTaskCreate}/>
 
                 <p/>
 
@@ -122,7 +94,7 @@ function App() {
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
                             <h6>To Do</h6>
                         </nav>
-                        <Column task={task} status='To Do' onChangeStatus={onChangeStatus}
+                        <Column tasks={tasks} status='To Do' onChangeStatus={onChangeStatus}
                                 btnState={btnState} onBtnStateChange={onBtnStateChange}
                                 onTaskDelete={onTaskDelete}/>
                     </div>
@@ -130,7 +102,7 @@ function App() {
                         <nav className="card" className="navbar navbar-expand-lg navbar-light bg-light">
                             <h6>In Progress</h6>
                         </nav>
-                        <Column task={task} status='In Progress' onChangeStatus={onChangeStatus}
+                        <Column tasks={tasks} status='In Progress' onChangeStatus={onChangeStatus}
                                 btnState={btnState} onBtnStateChange={onBtnStateChange}
                                 onTaskDelete={onTaskDelete}/>
                     </div>
@@ -138,7 +110,7 @@ function App() {
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
                             <h6>In Review</h6>
                         </nav>
-                        <Column task={task} status='In Review' onChangeStatus={onChangeStatus}
+                        <Column tasks={tasks} status='In Review' onChangeStatus={onChangeStatus}
                                 btnState={btnState} onBtnStateChange={onBtnStateChange}
                                 onTaskDelete={onTaskDelete}/>
                     </div>
@@ -146,7 +118,7 @@ function App() {
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
                             <h6>Done</h6>
                         </nav>
-                        <Column task={task} status='Done' onChangeStatus={onChangeStatus}
+                        <Column tasks={tasks} status='Done' onChangeStatus={onChangeStatus}
                                 btnState={btnState} onBtnStateChange={onBtnStateChange}
                                 onTaskDelete={onTaskDelete}/>
                     </div>
