@@ -26,11 +26,12 @@ function TaskCreateForm(props) {
 
     const taskCreate = (e) => {
         e.preventDefault();
-        {props.onTaskCreate(taskInput)};
+        {
+            props.onTaskCreate(taskInput)
+        }
+        ;
         setTaskInput('');
     }
-
-
 
     return (
         <div>

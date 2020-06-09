@@ -76,7 +76,7 @@ function App() {
     const onTaskCreate = (taskInput) => {
         console.log(taskInput);
         const updatedTaskList = [...tasks];
-        updatedTaskList.push({id: uuidv4(), name: taskInput, priority: 'High' , status: states[0]});
+        updatedTaskList.push({id: uuidv4(), name: taskInput, priority: 'High', status: states[0]});
         setTasks(updatedTaskList);
     }
 

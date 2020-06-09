@@ -3,7 +3,6 @@ import TaskCard from "./TaskCard";
 
 function Column(props) {
 
-
     return (
         <div>
             {props.tasks
@@ -12,7 +11,6 @@ function Column(props) {
                                      btnState={props.btnState} onBtnStateChange={props.onBtnStateChange}
                                      onTaskDelete={props.onTaskDelete}/>)
             }
-
 
         </div>
     );
