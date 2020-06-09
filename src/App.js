@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import Column from './Column';
 import {v4 as uuidv4} from 'uuid';
+import TaskCreateForm from "./TaskCreateForm";
 
 uuidv4(); // ⇨ '9b1deb4d-3b7d-4bad-9bdd-2b0d7b3dcb6d'
 function App() {
@@ -93,36 +94,27 @@ function App() {
         setTask(taskListAfterDelete);
     }
 
-    const onTaskCreate = (task) => {
-        console.log(task);
-        const afterTaskAdded = [...task];
-        afterTaskAdded.push({id: uuidv4(), name: task, priority: 'High', status: 'To Do'});
-        setTask(afterTaskAdded);
+    const onTaskCreate = (value) => {
+        console.log(value);
+        const updatedTaskList = [...task];
+        updatedTaskList.push({id: uuidv4(), name: value, priority: 'High', status: 'To Do'});
+        setTask(updatedTaskList);
     }
+
 
     return (
         <div>
             <div className="container">
                 <h1>Kanban</h1>
+                <TaskCreateForm isOpenTaskForm={isOpenTaskForm}
+                                onClickCreateTask={onClickCreateTask}
+                                taskInput={taskInput}
+                                onInputChange={onInputChange}
+                                isActiveTaskCreateBtn={isActiveTaskCreateBtn}
+                                onTaskCreate={onTaskCreate}
+                                onCreateTaskCancel={onCreateTaskCancel}
+                />
 
-                {!isOpenTaskForm &&
-                <button type="button" className="btn btn-primary" onClick={onClickCreateTask}>Create Task</button>}
-
-                {isOpenTaskForm &&
-                <form>
-                    <div className="form-group">
-                        <label htmlFor="exampleInputTask">Task</label>
-                        <input type="task" className="form-control" value={taskInput}
-                               onChange={onInputChange}/>
-                    </div>
-                    <button type="submit" className="btn btn-primary"
-                            disabled={isActiveTaskCreateBtn}
-                            onClick={onTaskCreate}>
-                        Submit
-                    </button>
-                    <button type="cancel" className="btn btn-secondary" onClick={onCreateTaskCancel}>Cancel</button>
-                </form>
-                }
                 <p/>
 
                 <div className="row">

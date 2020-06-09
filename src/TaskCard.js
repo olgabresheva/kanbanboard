@@ -42,7 +42,6 @@ function TaskCard(props) {
                         <span className="float-right"
                               onClick={() => props.onChangeStatus({id: props.task.id, direction: 'left'})}
                         >{leftBtn}</span>
-
                     </div>
                 </div>
             </div>
