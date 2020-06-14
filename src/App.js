@@ -43,6 +43,12 @@ function App() {
 
     const states = ['To Do', 'In Progress', 'In Review', 'Done'];
 
+    const priority = ['High', 'Medium', 'Low'];
+
+    const [isStateBtnHidden, setIsStateBtnHidden] = useState(false);
+    const [isPriorityBtnHidden, setIsPriorityBtnHidden] = useState(false);
+
+
     const onChangeStatus = ({id, direction}) => {
         const updatedTasks = tasks.map(el => {
             if (el.id === id) {
@@ -57,6 +63,22 @@ function App() {
         });
         setTasks(updatedTasks);
     };
+
+    const onChangePriority = ({id, direction}) => {
+       // console.log({id, direction})
+        const tasksPriorityEdit = tasks.map(el => {
+            if(el.id === id){
+                if(direction === 'up'){
+                    el.priority = priority[priority.indexOf(el.priority) - 1];
+                }
+                if(direction === 'down'){
+                    el.priority = priority[priority.indexOf(el.priority) + 1];
+                } return el
+            } else return el;
+        });
+        setTasks(tasksPriorityEdit);
+    };
+
 
     const [btnState, setBtnState] = useState(true);
 
@@ -96,7 +118,10 @@ function App() {
                         </nav>
                         <Column tasks={tasks} status='To Do' onChangeStatus={onChangeStatus}
                                 btnState={btnState} onBtnStateChange={onBtnStateChange}
-                                onTaskDelete={onTaskDelete}/>
+                                onTaskDelete={onTaskDelete}
+                                onChangePriority={onChangePriority}
+                                isStateBtnHidden={isStateBtnHidden}
+                                isPriorityBtnHidden={isPriorityBtnHidden}/>
                     </div>
                     <div className="col-sm">
                         <nav className="card" className="navbar navbar-expand-lg navbar-light bg-light">
@@ -104,7 +129,10 @@ function App() {
                         </nav>
                         <Column tasks={tasks} status='In Progress' onChangeStatus={onChangeStatus}
                                 btnState={btnState} onBtnStateChange={onBtnStateChange}
-                                onTaskDelete={onTaskDelete}/>
+                                onTaskDelete={onTaskDelete}
+                                onChangePriority={onChangePriority}
+                                isStateBtnHidden={isStateBtnHidden}
+                                isPriorityBtnHidden={isPriorityBtnHidden}/>
                     </div>
                     <div className="col-sm">
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -112,7 +140,10 @@ function App() {
                         </nav>
                         <Column tasks={tasks} status='In Review' onChangeStatus={onChangeStatus}
                                 btnState={btnState} onBtnStateChange={onBtnStateChange}
-                                onTaskDelete={onTaskDelete}/>
+                                onTaskDelete={onTaskDelete}
+                                onChangePriority={onChangePriority}
+                                isStateBtnHidden={isStateBtnHidden}
+                                isPriorityBtnHidden={isPriorityBtnHidden}/>
                     </div>
                     <div className="col-sm">
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -120,7 +151,10 @@ function App() {
                         </nav>
                         <Column tasks={tasks} status='Done' onChangeStatus={onChangeStatus}
                                 btnState={btnState} onBtnStateChange={onBtnStateChange}
-                                onTaskDelete={onTaskDelete}/>
+                                onTaskDelete={onTaskDelete}
+                                onChangePriority={onChangePriority}
+                                isStateBtnHidden={isStateBtnHidden}
+                                isPriorityBtnHidden={isPriorityBtnHidden}/>
                     </div>
                 </div>
             </div>
