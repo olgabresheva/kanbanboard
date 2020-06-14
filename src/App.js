@@ -45,10 +45,6 @@ function App() {
 
     const priority = ['High', 'Medium', 'Low'];
 
-    const [isStateBtnHidden, setIsStateBtnHidden] = useState(false);
-    const [isPriorityBtnHidden, setIsPriorityBtnHidden] = useState(false);
-
-
     const onChangeStatus = ({id, direction}) => {
         const updatedTasks = tasks.map(el => {
             if (el.id === id) {
@@ -79,17 +75,6 @@ function App() {
         setTasks(tasksPriorityEdit);
     };
 
-
-    const [btnState, setBtnState] = useState(true);
-
-    const onBtnStateChange = (id) => {
-        tasks.map(el => {
-            if (el.id === id && el.status === 'To Do') {
-                return setBtnState(false);
-            }
-        })
-    }
-
     const onTaskDelete = (id) => {
         const taskListAfterDelete = tasks.filter(el => el.id !== id);
         setTasks(taskListAfterDelete);
@@ -116,45 +101,37 @@ function App() {
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
                             <h6>To Do</h6>
                         </nav>
+                        <p/>
                         <Column tasks={tasks} status='To Do' onChangeStatus={onChangeStatus}
-                                btnState={btnState} onBtnStateChange={onBtnStateChange}
                                 onTaskDelete={onTaskDelete}
-                                onChangePriority={onChangePriority}
-                                isStateBtnHidden={isStateBtnHidden}
-                                isPriorityBtnHidden={isPriorityBtnHidden}/>
+                                onChangePriority={onChangePriority}/>
                     </div>
                     <div className="col-sm">
-                        <nav className="card" className="navbar navbar-expand-lg navbar-light bg-light">
+                        <nav className="navbar navbar-expand-lg navbar-light bg-light">
                             <h6>In Progress</h6>
                         </nav>
+                        <p/>
                         <Column tasks={tasks} status='In Progress' onChangeStatus={onChangeStatus}
-                                btnState={btnState} onBtnStateChange={onBtnStateChange}
                                 onTaskDelete={onTaskDelete}
-                                onChangePriority={onChangePriority}
-                                isStateBtnHidden={isStateBtnHidden}
-                                isPriorityBtnHidden={isPriorityBtnHidden}/>
+                                onChangePriority={onChangePriority}/>
                     </div>
                     <div className="col-sm">
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
                             <h6>In Review</h6>
                         </nav>
+                        <p/>
                         <Column tasks={tasks} status='In Review' onChangeStatus={onChangeStatus}
-                                btnState={btnState} onBtnStateChange={onBtnStateChange}
                                 onTaskDelete={onTaskDelete}
-                                onChangePriority={onChangePriority}
-                                isStateBtnHidden={isStateBtnHidden}
-                                isPriorityBtnHidden={isPriorityBtnHidden}/>
+                                onChangePriority={onChangePriority}/>
                     </div>
                     <div className="col-sm">
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
                             <h6>Done</h6>
                         </nav>
+                        <p/>
                         <Column tasks={tasks} status='Done' onChangeStatus={onChangeStatus}
-                                btnState={btnState} onBtnStateChange={onBtnStateChange}
                                 onTaskDelete={onTaskDelete}
-                                onChangePriority={onChangePriority}
-                                isStateBtnHidden={isStateBtnHidden}
-                                isPriorityBtnHidden={isPriorityBtnHidden}/>
+                                onChangePriority={onChangePriority}/>
                     </div>
                 </div>
             </div>

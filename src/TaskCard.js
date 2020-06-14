@@ -42,36 +42,37 @@ function TaskCard(props) {
     </svg>);
 
 
-
     return (
         <div>
             <div className="card">
                 <div className="clearfix">
-                    <span className="card-header bg-transparent border-primary">P: {props.task.priority}</span>
-                    <span
-                        onClick={() => props.onChangePriority({id: props.task.id, direction: 'down'})}
-                        hidden={props.isPriorityBtnHidden}
-                    >{downBtn}</span>
-                    <span
-                        onClick={() => props.onChangePriority({id: props.task.id, direction: 'up'})}
-                        hidden={props.isPriorityBtnHidden}
-                    >{upBtn}</span>
+                    <span className="card-header bg-transparent border-primary">
+                        P: {props.task.priority}</span>
+                    {props.task.priority !== 'High' &&
+                    <span onClick={() => props.onChangePriority({id: props.task.id, direction: 'up'})}
+                    >{upBtn}</span>}
+                    {props.task.priority !== 'Low' &&
+                    <span onClick={() => props.onChangePriority({id: props.task.id, direction: 'down'})}
+                    >{downBtn}</span>}
                 </div>
+
                 <div className="card-body">
                     <div>
                         {props.task.name}
                     </div>
                     <p/>
                     <div className="clearfix">
-                        <span className="float-left" hidden={props.isStateBtnHidden}
+                        <span className="float-left"
                               onClick={() => props.onTaskDelete(props.task.id)}>{deleteIcon}</span>
+
+                        {props.task.status !== 'Done' &&
+                        <span className="float-right"
+                              onClick={() => props.onChangeStatus({id: props.task.id, direction: 'right'})}>
+                            {rightBtn}</span>}
+                        {props.task.status !== 'To Do' &&
                         <span className="float-right" onClick={() => props.onChangeStatus({
-                            id: props.task.id,
-                            direction: 'right'
-                        })}>{rightBtn}</span>
-                        <span className="float-right" hidden={props.isStateBtnHidden}
-                              onClick={() => props.onChangeStatus({id: props.task.id, direction: 'left'})}
-                        >{leftBtn}</span>
+                            id: props.task.id, direction: 'left'
+                        })}>{leftBtn}</span>}
                     </div>
                 </div>
             </div>
