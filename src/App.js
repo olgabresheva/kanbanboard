@@ -87,7 +87,6 @@ function App() {
         setTasks(updatedTaskList);
     }
 
-
     return (
         <div>
             <div className="container">
