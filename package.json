@@ -2,7 +2,7 @@
   "name": "kanbanboard",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://obresheva.github.io/kanbanboard",
+  "homepage": "https://olgabresheva.github.io/kanbanboard/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
