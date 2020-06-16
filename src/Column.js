@@ -7,9 +7,10 @@ function Column(props) {
         <div>
             {props.tasks
                 .filter(el => el.status === props.status)
-                .map(el => <p><TaskCard key={el.id} task={el} onChangeStatus={props.onChangeStatus}
+                .map(el => <p key={el.id}><TaskCard key={el.id} task={el} onChangeStatus={props.onChangeStatus}
                                         onTaskDelete={props.onTaskDelete}
                                         onChangePriority={props.onChangePriority}
+                                        onSaveTask={props.onSaveTask}
                 /></p>)
             }
         </div>

@@ -61,15 +61,16 @@ function App() {
     };
 
     const onChangePriority = ({id, direction}) => {
-       // console.log({id, direction})
+        // console.log({id, direction})
         const tasksPriorityEdit = tasks.map(el => {
-            if(el.id === id){
-                if(direction === 'up'){
+            if (el.id === id) {
+                if (direction === 'up') {
                     el.priority = priority[priority.indexOf(el.priority) - 1];
                 }
-                if(direction === 'down'){
+                if (direction === 'down') {
                     el.priority = priority[priority.indexOf(el.priority) + 1];
-                } return el
+                }
+                return el
             } else return el;
         });
         setTasks(tasksPriorityEdit);
@@ -82,17 +83,24 @@ function App() {
 
     const onTaskCreate = (taskInput) => {
         console.log(taskInput);
-        const updatedTaskList = [...tasks];
-        updatedTaskList.push({id: uuidv4(), name: taskInput, priority: 'High', status: states[0]});
-        setTasks(updatedTaskList);
+        const addedTaskList = [...tasks];
+        addedTaskList.push({id: uuidv4(), name: taskInput, priority: 'High', status: states[0]});
+        setTasks(addedTaskList);
+    }
+
+    const onSaveTask = (task) => {
+        const editedTaskList = tasks.map(el => {
+            if (task.id === el.id) return {...el, name: task.name}
+            else return el
+        })
+        setTasks(editedTaskList);
     }
 
     return (
         <div>
             <div className="container">
-                <h1>Kanban</h1>
+                <a href="https://github.com/olgabresheva/kanbanboard"> <h2>Kanban</h2></a>
                 <TaskCreateForm onTaskCreate={onTaskCreate}/>
-
                 <p/>
 
                 <div className="row">
@@ -103,7 +111,8 @@ function App() {
                         <p/>
                         <Column tasks={tasks} status='To Do' onChangeStatus={onChangeStatus}
                                 onTaskDelete={onTaskDelete}
-                                onChangePriority={onChangePriority}/>
+                                onChangePriority={onChangePriority}
+                                onSaveTask={onSaveTask}/>
                     </div>
                     <div className="col-sm">
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -112,7 +121,8 @@ function App() {
                         <p/>
                         <Column tasks={tasks} status='In Progress' onChangeStatus={onChangeStatus}
                                 onTaskDelete={onTaskDelete}
-                                onChangePriority={onChangePriority}/>
+                                onChangePriority={onChangePriority}
+                                onSaveTask={onSaveTask}/>
                     </div>
                     <div className="col-sm">
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -121,7 +131,8 @@ function App() {
                         <p/>
                         <Column tasks={tasks} status='In Review' onChangeStatus={onChangeStatus}
                                 onTaskDelete={onTaskDelete}
-                                onChangePriority={onChangePriority}/>
+                                onChangePriority={onChangePriority}
+                                onSaveTask={onSaveTask}/>
                     </div>
                     <div className="col-sm">
                         <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -130,7 +141,8 @@ function App() {
                         <p/>
                         <Column tasks={tasks} status='Done' onChangeStatus={onChangeStatus}
                                 onTaskDelete={onTaskDelete}
-                                onChangePriority={onChangePriority}/>
+                                onChangePriority={onChangePriority}
+                                onSaveTask={onSaveTask}/>
                     </div>
                 </div>
             </div>
